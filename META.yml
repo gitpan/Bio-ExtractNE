@@ -1,0 +1,21 @@
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         Bio-ExtractNE
+version:      1.00
+version_from: Bio/ExtractNE.pm
+installdirs:  site
+requires:
+    Exporter::Lite:                0.01
+    HTML::Entities:                1.27
+    Lingua::EN::Inflect:           1.88
+    Lingua::EN::Tagger:            0
+    LWP::Simple:                   1.38
+    Quantum::Superpositions:       1.05
+    Regexp::Bind:                  0.04
+    Regexp::Common:                2.112
+    RPC::XML::Client:              0
+    Test::More:                    0
+    YAML:                          0.35
+
+distribution_type: module
+generated_by: ExtUtils::MakeMaker version 6.17
