@@ -9,7 +9,7 @@ use Bio::ExtractNE::Dict;
 use Bio::ExtractNE::Vars;
 use Bio::ExtractNE::CommonWords;
 
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 
 our @EXPORT;
 our @ISA;

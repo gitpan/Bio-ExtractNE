@@ -1,0 +1,31 @@
+<NAME>
+
+Bio::ExtractNE - Extract biological named entities from PUBMED abstracts
+
+<DESCRIPTION>
+
+This module can extract Named Entities from PUBMED online
+abstracts. It recognizes protein names and gene names adapted from
+SWISSPROT database. And it also tries to resolve on-the-spot
+abbreviation reference, which means abbreviations in abstracts
+bracketed between parentheses will be extracted too using a naive
+looking-back method, though the technique is inelegant in some way
+now.
+
+For now, this package use GAPSCORE as its name guessing module. Both
+an RPC interface and a self-implemented version are provided.
+
+You can pass a PMID, a URL for abstract, an abstract passage, or an
+abstract file to the extractNE() function. It then returns a list of
+tokens, recognized named entities, abbreviations with their full
+names, and sentence numbers in which there are potential
+protein-protein interactions. But no categorical or synonym grouping
+information of named entities is provided. Other classes of words,
+such as disease names and virus names will be considered in future
+versions.
+
+Any suggestion or comment is always welcome. Contributions and
+patches are wanted.
+
+Email me if you have questions.
+

@@ -48,10 +48,15 @@ our $stoplist_pattern =
 
 
 
-our $first_default_dictfile = '/usr/local/Bio-ExtractNE/sprot.dict';
+my $default_dictpath = '/usr/local/Bio-ExtractNE';
+
+our $first_default_dictfile
+    = ($ENV{BENEDICTPATH} || $default_dictpath) . '/sprot.dict';
+
 our $second_default_dictfile = 'dict/sprot.dict';
 
-
+our $default_commonwords_file =
+    ($ENV{BENEDICTPATH} || $default_dictpath) . '/common_words.dict'; 
 
 1;
 __END__

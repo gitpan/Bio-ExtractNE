@@ -5,13 +5,26 @@ use File::Copy;
 use File::Path;
 use ExtUtils::MakeMaker;
 
-
+sub change_default_dictpath {
+    my $path = shift;
+    open my $f, 'lib/Bio/ExtractNE/Vars.pm' or die $!;
+    local $/;
+    my $t = <$f>;
+    $t =~ s(default_dictpath = '.+?')(default_dictpath = '$path');
+    close $f;
+    open my $f, '>', 'lib/Bio/ExtractNE/Vars.pm' or die $!;
+    print $f $t;
+}
 sub install_dict {
     my $dict_dir = '/usr/local/Bio-ExtractNE';
+
     my $input = prompt("\nThe dictionary will be installed into?", 
 		    '/usr/local/Bio-ExtractNE');
     $dict_dir = $input if $input;
+
     mkpath([$dict_dir], 0, 0755);
+    change_default_dictpath($dict_dir);
+
     for my $file (glob("dict/sprot*"), "dict/common_words.dict"){
 	my $dest_file = ($file =~ m,dict/, => $'); 
         print "Copying $file to $dict_dir/$dest_file ... ";
@@ -55,6 +68,7 @@ WriteMakefile
             YAML                    0.35
 	    )
 	 },
+     'EXE_FILES'       => [ 'bin/bene.pl' ],
      ($] >= 5.005 ?
       (ABSTRACT_FROM => 'lib/Bio/ExtractNE.pm',
        AUTHOR     => 'Yung-chung Lin <xern@cpan.org>') : ()),

@@ -23,7 +23,13 @@ our @EXPORT = qw(dict);
     $d = dict($dictionary_file);
 
 Dictionary file defaults to /usr/local/Bio-ExtractNE/sprot.dict or
-dict/sprot.dict
+dict/sprot.dict.
+
+You can set env variable $ENV{BENEDICTPATH} to others if
+you need to use the dictionary installed somewhere else temporarily.
+
+    # An example with bash
+    > export BENEDICTPATH=/home/my.name/Bio-ExtractNE/
 
 
 dict() returns an object of the dictionary with several addtional

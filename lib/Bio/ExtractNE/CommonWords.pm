@@ -2,6 +2,7 @@ package Bio::ExtractNE::CommonWords;
 
 use DB_File;
 use Exporter::Lite;
+use Bio::ExtractNE::Vars;
 use Lingua::EN::Inflect qw ( PL PL_N PL_V PL_ADJ NO NUM
 			     PL_eq PL_N_eq PL_V_eq PL_ADJ_eq
 			     A AN
@@ -20,9 +21,9 @@ our @EXPORT = qw(
 my %common_word;
 
 sub load_commonwords {
-    my $cwdb = '/usr/local/Bio-ExtractNE/common_words.dict';
     tie %common_word, 'DB_File',
-    (-e $cwdb ? $cwdb : 'dict/common_words.dict' ),
+    (-e $default_commonwords_file ? $default_commonwords_file
+     : 'dict/common_words.dict' ),
     O_RDONLY, 0644, $DB_BTREE or die $!;
 }
 

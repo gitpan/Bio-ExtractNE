@@ -14,3 +14,6 @@
 
 1.04 Sat, 16 Oct 2004 20:45:16 +0800
 	- Added $USE_ARRAY in Bio/ExtractNE/GetAbst.pm
+
+1.05 Sat, 30 Oct 2004 12:15:11 +0800
+	- Flexible dictionary path setting.
