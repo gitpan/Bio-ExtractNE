@@ -15,12 +15,12 @@ sub install_dict {
 }
 
 print "Install the dictionary, [Y/n]?";
-unless (<> =~ /n/i){
+unless (<STDIN> =~ /n/i){
     &install_dict();
 }
 
-mkdir 'lib';
-`cp -rf Bio/ lib/`;
+#mkdir 'lib';
+#`cp -rf Bio/ lib/`;
 WriteMakefile
     (
      'NAME'             => 'Bio::ExtractNE',

@@ -4,7 +4,7 @@ use strict;
 
 use Exporter::Lite;
 our @EXPORT;
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 use Data::Dumper;
 
@@ -172,7 +172,6 @@ L<bene.pl>, a command-line tool for <Bio::ExtractNE> B<(Not done yet)>
 For a similar function, see also L<Lingua::EN::NamedEntity>, except it
 is written to deal with general English texts.
 
-GAPSCORE, L<http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=14734313>
 PUBMED, L<http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed>
 
 SwissProt, L<http://expasy.org/>
@@ -183,11 +182,5 @@ Copyright (C) 2004 Yung-chung Lin (a.k.a. xern) <xern@cpan.org> and Chin-lin Pen
 
 This package is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself
-
-=head1 CAVEAT!
-
-The whole module is in a totally gross state. Need to do lots of
-improvement and code clean-up later.
-
 
 =cut
