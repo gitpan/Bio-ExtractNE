@@ -1,2 +1,8 @@
 1.01 Thu, 09 Sep 2004 14:12:47 +0800
 	- minor bug fixes
+
+1.02 Fri, 15 Oct 2004 15:16:10 +0800
+	- Code clean-up
+	- Added some more features.
+	- Dictionary update.
+	- Rewritten Swissprot parser.

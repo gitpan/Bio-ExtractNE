@@ -1,0 +1,112 @@
+--- #YAML:1.0 !perl/AI::NaiveBayes1
+attributes:
+  - word_length
+attvals:
+  word_length:
+    - 12
+    - 7
+    - 11
+    - 8
+    - 10
+    - 5
+    - 9
+    - 13
+    - 6
+    - 24
+    - 19
+    - 21
+    - 18
+    - 23
+    - 17
+    - 16
+    - 15
+    - 14
+    - 4
+    - 20
+    - 27
+    - 22
+    - 25
+labels:
+  - isGeneName=yes
+  - isGeneName=no
+model:
+  condprob: {}
+  labelprob:
+    isGeneName=no: 0.0177430801987225
+    isGeneName=yes: 0.982256919801277
+  real_attr: &1
+    word_length: 1
+  real_stat:
+    word_length:
+      isGeneName=no:
+        count: 25
+        mean: 8.56
+        stddev: 2.2
+        sum: 214
+      isGeneName=yes:
+        count: 1384
+        mean: 10.3005780346821
+        stddev: 3.39057427010645
+        sum: 14256
+numof_instances: 1409
+real_attr: *1
+real_stat: {}
+stat_attributes:
+  word_length:
+    10:
+      isGeneName=no: 5
+      isGeneName=yes: 204
+    11:
+      isGeneName=no: 4
+      isGeneName=yes: 180
+    12:
+      isGeneName=yes: 100
+    13:
+      isGeneName=no: 1
+      isGeneName=yes: 79
+    14:
+      isGeneName=yes: 41
+    15:
+      isGeneName=yes: 30
+    16:
+      isGeneName=yes: 32
+    17:
+      isGeneName=yes: 20
+    18:
+      isGeneName=yes: 24
+    19:
+      isGeneName=yes: 16
+    20:
+      isGeneName=yes: 6
+    21:
+      isGeneName=yes: 2
+    22:
+      isGeneName=yes: 3
+    23:
+      isGeneName=yes: 8
+    24:
+      isGeneName=yes: 4
+    25:
+      isGeneName=yes: 1
+    27:
+      isGeneName=yes: 1
+    4:
+      isGeneName=yes: 1
+    5:
+      isGeneName=no: 2
+      isGeneName=yes: 33
+    6:
+      isGeneName=no: 5
+      isGeneName=yes: 88
+    7:
+      isGeneName=no: 1
+      isGeneName=yes: 141
+    8:
+      isGeneName=no: 3
+      isGeneName=yes: 177
+    9:
+      isGeneName=no: 4
+      isGeneName=yes: 193
+stat_labels:
+  isGeneName=no: 25
+  isGeneName=yes: 1384

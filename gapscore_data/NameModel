@@ -1,0 +1,348 @@
+--- #YAML:1.0 !perl/AI::NaiveBayes1
+attributes:
+  - gene_name
+  - A7
+  - A13
+  - A11
+  - A6
+  - A4
+  - A1
+  - A5
+  - A9
+  - A3
+  - A12
+  - A10
+  - A2
+  - A8
+attvals:
+  A1:
+    - 0
+    - 1
+  A10:
+    - 0
+    - 1
+  A11:
+    - 0
+    - 1
+  A12:
+    - 0
+    - 1
+  A13:
+    - 0
+    - 1
+  A2:
+    - 0
+    - 1
+  A3:
+    - 0
+  A4:
+    - 1
+    - 0
+  A5:
+    - 1
+    - 0
+  A6:
+    - 1
+    - 0
+  A7:
+    - 0
+    - 1
+  A8:
+    - 1
+    - 0
+  A9:
+    - 0
+    - 1
+  gene_name:
+    - 0
+    - 0.995037708772887
+    - 0.982063957869524
+    - 0.988532879831906
+    - 0.966395432985085
+    - 0.975121912564992
+    - 0.969348147791439
+    - 0.96718538666424
+    - 0.990789739477502
+    - 0.984858819694001
+    - 0.977938240166154
+    - 0.971467003562972
+    - 0.999999998031834
+    - 0.999990358322927
+    - 0.999999538708288
+    - 0.999963161437281
+    - 0.99999998632317
+    - 0.999875125436964
+    - 0.999624489333331
+    - 0.998998490601154
+    - 0.997631829680742
+    - 0.999997761064812
+    - 0.999999999997139
+    - 0.999999915674911
+    - 0.999999999748704
+labels:
+  - isName=yes
+  - isName=no
+model:
+  condprob:
+    A1:
+      0:
+        isName=no: 0.999398775688675
+        isName=yes: 0.999746824455311
+      1:
+        isName=no: 0.00060122431132488
+        isName=yes: 0.0002531755446891
+    A10:
+      0:
+        isName=no: 0.605159597726279
+        isName=yes: 0.990003182778276
+      1:
+        isName=no: 0.394840402273721
+        isName=yes: 0.00999681722172391
+    A11:
+      0:
+        isName=no: 0.733766943594228
+        isName=yes: 0.349932004282283
+      1:
+        isName=no: 0.266233056405772
+        isName=yes: 0.650067995717716
+    A12:
+      0:
+        isName=no: 0.762461740271097
+        isName=yes: 0.853252220711206
+      1:
+        isName=no: 0.237538259728902
+        isName=yes: 0.146747779288794
+    A13:
+      0:
+        isName=no: 0.578979011805859
+        isName=yes: 0.97079800931686
+      1:
+        isName=no: 0.421020988194141
+        isName=yes: 0.02920199068314
+    A2:
+      0:
+        isName=no: 0.986281154350678
+        isName=yes: 0.996730418680015
+      1:
+        isName=no: 0.0137188456493223
+        isName=yes: 0.00326958131998495
+    A3:
+      0:
+        isName=no: 1
+        isName=yes: 1
+    A4:
+      0:
+        isName=no: 0.0143200699606471
+        isName=yes: 0.00352275686467405
+      1:
+        isName=no: 0.985679930039353
+        isName=yes: 0.996477243135326
+    A5:
+      0:
+        isName=no: 0.987647573240052
+        isName=yes: 0.99701976215966
+      1:
+        isName=no: 0.0123524267599475
+        isName=yes: 0.00298023784034027
+    A6:
+      0:
+        isName=no: 0.456383909051159
+        isName=yes: 0.243410202251092
+      1:
+        isName=no: 0.543616090948841
+        isName=yes: 0.756589797748908
+    A7:
+      0:
+        isName=no: 0.931624398775689
+        isName=yes: 0.989684904950667
+      1:
+        isName=no: 0.0683756012243113
+        isName=yes: 0.0103150950493331
+    A8:
+      0:
+        isName=no: 0.408504591167468
+        isName=yes: 0.0100112843957061
+      1:
+        isName=no: 0.591495408832532
+        isName=yes: 0.989988715604294
+    A9:
+      0:
+        isName=no: 0.675448185395715
+        isName=yes: 0.767671653019299
+      1:
+        isName=no: 0.324551814604285
+        isName=yes: 0.232328346980701
+  labelprob:
+    isName=no: 0.116877475405647
+    isName=yes: 0.883122524594353
+  real_attr: &1
+    gene_name: 1
+  real_stat:
+    gene_name:
+      isName=no:
+        count: 18296
+        mean: 0.00181263851039783
+        stddev: 0.0420117140106684
+        sum: 33.1640341862387
+      isName=yes:
+        count: 138244
+        mean: 0.0101616297506421
+        stddev: 0.0992610773518942
+        sum: 1404.78434324777
+numof_instances: 156540
+real_attr: *1
+real_stat: {}
+stat_attributes:
+  A1:
+    0:
+      isName=no: 18285
+      isName=yes: 138209
+    1:
+      isName=no: 11
+      isName=yes: 35
+  A10:
+    0:
+      isName=no: 11072
+      isName=yes: 136862
+    1:
+      isName=no: 7224
+      isName=yes: 1382
+  A11:
+    0:
+      isName=no: 13425
+      isName=yes: 48376
+    1:
+      isName=no: 4871
+      isName=yes: 89868
+  A12:
+    0:
+      isName=no: 13950
+      isName=yes: 117957
+    1:
+      isName=no: 4346
+      isName=yes: 20287
+  A13:
+    0:
+      isName=no: 10593
+      isName=yes: 134207
+    1:
+      isName=no: 7703
+      isName=yes: 4037
+  A2:
+    0:
+      isName=no: 18045
+      isName=yes: 137792
+    1:
+      isName=no: 251
+      isName=yes: 452
+  A3:
+    0:
+      isName=no: 18296
+      isName=yes: 138244
+  A4:
+    0:
+      isName=no: 262
+      isName=yes: 487
+    1:
+      isName=no: 18034
+      isName=yes: 137757
+  A5:
+    0:
+      isName=no: 18070
+      isName=yes: 137832
+    1:
+      isName=no: 226
+      isName=yes: 412
+  A6:
+    0:
+      isName=no: 8350
+      isName=yes: 33650
+    1:
+      isName=no: 9946
+      isName=yes: 104594
+  A7:
+    0:
+      isName=no: 17045
+      isName=yes: 136818
+    1:
+      isName=no: 1251
+      isName=yes: 1426
+  A8:
+    0:
+      isName=no: 7474
+      isName=yes: 1384
+    1:
+      isName=no: 10822
+      isName=yes: 136860
+  A9:
+    0:
+      isName=no: 12358
+      isName=yes: 106126
+    1:
+      isName=no: 5938
+      isName=yes: 32118
+  gene_name:
+    0:
+      isName=no: 18262
+      isName=yes: 136810
+    0.966395432985085:
+      isName=no: 2
+      isName=yes: 142
+    0.96718538666424:
+      isName=no: 4
+      isName=yes: 178
+    0.969348147791439:
+      isName=no: 7
+      isName=yes: 91
+    0.971467003562972:
+      isName=no: 4
+      isName=yes: 193
+    0.975121912564992:
+      isName=no: 2
+      isName=yes: 43
+    0.977938240166154:
+      isName=no: 5
+      isName=yes: 204
+    0.982063957869524:
+      isName=no: 4
+      isName=yes: 23
+    0.984858819694001:
+      isName=no: 4
+      isName=yes: 180
+    0.988532879831906:
+      isName=no: 1
+      isName=yes: 12
+    0.990789739477502:
+      isName=yes: 100
+    0.995037708772887:
+      isName=no: 1
+      isName=yes: 80
+    0.997631829680742:
+      isName=yes: 41
+    0.998998490601154:
+      isName=yes: 30
+    0.999624489333331:
+      isName=yes: 32
+    0.999875125436964:
+      isName=yes: 20
+    0.999963161437281:
+      isName=yes: 24
+    0.999990358322927:
+      isName=yes: 16
+    0.999997761064812:
+      isName=yes: 6
+    0.999999538708288:
+      isName=yes: 2
+    0.999999915674911:
+      isName=yes: 3
+    0.99999998632317:
+      isName=yes: 8
+    0.999999998031834:
+      isName=yes: 4
+    0.999999999748704:
+      isName=yes: 1
+    0.999999999997139:
+      isName=yes: 1
+stat_labels:
+  isName=no: 18296
+  isName=yes: 138244

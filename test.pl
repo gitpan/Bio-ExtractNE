@@ -13,7 +13,7 @@ ok($abst = get_abstract($id), 'Get abstract');
 set_dictionary('dict/sprot.dict');
 #set_dictionary();
 
-$Bio::ExtractNE::USE_GAPSCORE_RPC = 1;
+#$Bio::ExtractNE::USE_GAPSCORE_RPC = 1;
 #$Bio::ExtractNE::USE_GAPSCORE = 1;
 ok($data = extractNE($abst->{title}." ".$abst->{text}), 'Extract names');
 YAML::DumpFile('tokens', $data);

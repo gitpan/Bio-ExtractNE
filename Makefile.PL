@@ -1,49 +1,52 @@
-use ExtUtils::MakeMaker;
+use strict;
 
 use File::Copy;
+use File::Path;
+use ExtUtils::MakeMaker;
 
 sub install_dict {
-    $dict_dir = '/usr/local/Bio-ExtractNE';
-    print "\nThe dictionary will be installed into [/usr/local/Bio-ExtractNE]?  ";
-    chomp($input = <STDIN>);
+    my $dict_dir = '/usr/local/Bio-ExtractNE';
+    my $input = prompt("\nThe dictionary will be installed into?", 
+		    '/usr/local/Bio-ExtractNE');
     $dict_dir = $input if $input;
-    mkdir $dict_dir;
-    for $file (glob("dict/sprot*"), "dict/common_words.db"){
-	$dest_file = ($file =~ m,dict/,, $'); 
+    mkpath([$dict_dir], 0, 0755);
+    for my $file (glob("dict/sprot*"), "dict/common_words.db"){
+	my $dest_file = ($file =~ m,dict/, => $'); 
+        print "Copying $file to $dict_dir/$dest_file ... ";
 	copy("$file", "$dict_dir/$dest_file") or die $!;
+        print "Done$/";
     }
 }
 
-print "Install the dictionary, [Y/n]?";
-unless (<STDIN> =~ /n/i){
-    &install_dict();
-}
+install_dict() if prompt("Install the dictionary?", 'y') !~ /n/i;
 
-#mkdir 'lib';
-#`cp -rf Bio/ lib/`;
+
 WriteMakefile
     (
      'NAME'             => 'Bio::ExtractNE',
-     'VERSION_FROM'     => 'Bio/ExtractNE.pm',
+     'VERSION_FROM'     => 'lib/Bio/ExtractNE.pm',
      'PREREQ_PM'                => {
 	 qw(
-	    LWP::Simple             1.38
-	    YAML                    0.35
-	    HTML::Entities          1.27
-	    Exporter::Lite          0.01
-	    Lingua::EN::Inflect     1.88
-	    Lingua::EN::Tagger      0
-	    Regexp::Common          2.112
-	    Regexp::Bind            0.04
-	    Quantum::Superpositions 1.05
-	    Test::More              0
-	    RPC::XML::Client        0
+	    AI::NaiveBayes1         1.10
+            Compress::Zlib          1.33
+            Exporter::Lite          0.01
+            File::Which             0.05
+            HTML::Entities          1.27
+            IO::Zlib                1.04
+            Lingua::EN::Inflect     1.88
+            Lingua::EN::Tagger      0
+            LWP::Simple             1.38
+            Quantum::Superpositions 1.05
+            Regexp::Bind            0.04
+            Regexp::List            0.12
+            Regexp::Common          2.112
+            RPC::XML::Client        0
+            Test::More              0
+            YAML                    0.35
 	    )
 	 },
-     PMLIBDIRS => [ 'lib' ],
      ($] >= 5.005 ?
-      (ABSTRACT_FROM => 'Bio/ExtractNE.pm',
+      (ABSTRACT_FROM => 'lib/Bio/ExtractNE.pm',
        AUTHOR     => 'Yung-chung Lin <xern@cpan.org>') : ())
      );
-
 
