@@ -1,8 +1,10 @@
 use strict;
+BEGIN{unshift @INC, './lib'}
 
 use File::Copy;
 use File::Path;
 use ExtUtils::MakeMaker;
+
 
 sub install_dict {
     my $dict_dir = '/usr/local/Bio-ExtractNE';
@@ -10,7 +12,7 @@ sub install_dict {
 		    '/usr/local/Bio-ExtractNE');
     $dict_dir = $input if $input;
     mkpath([$dict_dir], 0, 0755);
-    for my $file (glob("dict/sprot*"), "dict/common_words.db"){
+    for my $file (glob("dict/sprot*"), "dict/common_words.dict"){
 	my $dest_file = ($file =~ m,dict/, => $'); 
         print "Copying $file to $dict_dir/$dest_file ... ";
 	copy("$file", "$dict_dir/$dest_file") or die $!;
@@ -18,17 +20,25 @@ sub install_dict {
     }
 }
 
-install_dict() if prompt("Install the dictionary?", 'y') !~ /n/i;
+sub build_dict {
+    use Bio::ExtractNE::MakeDict;
+    mkdict( { sprot_file => "data/dict.src" } => "sprot.dict" );
+    move($_ => "dict/$_") for glob("sprot.dict*");
+}
 
+if($ARGV[0] ne 'clean'){
+    build_dict() if prompt("Build the dictionary?", 'y') !~ /n/i;
+    install_dict() if prompt("Install the dictionary?", 'y') !~ /n/i;
+}
 
 WriteMakefile
     (
      'NAME'             => 'Bio::ExtractNE',
      'VERSION_FROM'     => 'lib/Bio/ExtractNE.pm',
+     'dist'             => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
      'PREREQ_PM'                => {
 	 qw(
 	    AI::NaiveBayes1         1.10
-            Compress::Zlib          1.33
             Exporter::Lite          0.01
             File::Which             0.05
             HTML::Entities          1.27
@@ -47,6 +57,7 @@ WriteMakefile
 	 },
      ($] >= 5.005 ?
       (ABSTRACT_FROM => 'lib/Bio/ExtractNE.pm',
-       AUTHOR     => 'Yung-chung Lin <xern@cpan.org>') : ())
+       AUTHOR     => 'Yung-chung Lin <xern@cpan.org>') : ()),
+
      );
 

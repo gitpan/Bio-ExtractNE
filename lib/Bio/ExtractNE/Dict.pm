@@ -122,6 +122,11 @@ In scalar context, returned is the number of synonyms.
 
     $syn = $d->get_synonyms($term);
 
+Another method I<get_shortest_synonym()> can help to get the shortest
+one in a synonym set.
+
+    $shortest_syn = $d->get_shortest_synonym($term);
+
 =cut
 
 sub get_synonyms {
@@ -133,6 +138,12 @@ sub get_synonyms {
 	@synlist = ($synroot, split /\x0/, $synstr);
     }
     wantarray ? @synlist : scalar(@synlist);
+}
+
+sub get_shortest_synonym {
+    my ($self, $term) = @_;
+    $self->{snx}->get($term => my $synroot);
+    $synroot;
 }
 
 =head2 COMMON WORD CHECKING

@@ -7,6 +7,6 @@ mkcwdict(
 	  "/usr/share/dict/words",
 	  "med.txt",
 	  ],
-	   "common_words.db", "dict/sprot.dict"
+	   "common_words.dict", "dict/sprot.dict"
 	 );
 

@@ -1,12 +1,8 @@
 bin/bene.pl
 Changes
+data/dict.src
+data/README
 dict/common_words.dict
-dict/sprot.dict
-dict/sprot.dict.hw
-dict/sprot.dict.lc
-dict/sprot.dict.ml
-dict/sprot.dict.sl
-dict/sprot.dict.sn
 gapscore_data/amino_acids
 gapscore_data/compounds
 gapscore_data/GeneNameModel

@@ -10,3 +10,7 @@ is(~~$d->get_synonyms('14-3-3-like protein GF14 upsilon') => 3);
 is($a[0] => 'GRF5');
 is($a[1] => 'General regulatory factor 5');
 is($a[2] => '14-3-3-like protein GF14 upsilon');
+
+$Bio::ExtractNE::USE_SHORTEST = 1;
+is($d->get_shortest_synonym('14-3-3-like protein GF14 upsilon')
+   => $d->get_shortest_synonym('General regulatory factor 5'));

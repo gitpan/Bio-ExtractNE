@@ -37,21 +37,23 @@ sub ext_DE {
 #    chop $de;
     $de =~ s{($RE{balanced}{-parens=>'[]'})}{my $g=$&;
 					     $g =~ /\[\w+?:/o ? '' : $g}gex;
+    $de =~ s/\((?:EC (?:(?:\d+|-)\.){3}(?:\d+|-)|Fragments?|Putative replicase)\)//go;
+
     if($de =~ /^(.+?) \(/o){
 	push @name, eliminate_precursor($1);
 	while($de =~ /($RE{balanced}{-parens=>'()'})/go){
 	    (my $t=$1)=~ s/\((.+)\)/$1/o;
 	    next if $t =~ /[()]/o && !/$RE{balanced}{-parens=>'()'}/o;
 	    next if $t =~ /[\[\]]/o && !/$RE{balanced}{-parens=>'[]'}/o;
-	    if($t !~ /^(?:EC (?:\d+\.){3}|Fragment|Putative replicase)/o){
-		push @name, eliminate_precursor($t);
-	    }
+	    push @name, eliminate_precursor($t);
 	}
     }
     else {
 	push @name, eliminate_precursor($de);
     }
-    return grep{$_}@name;
+    return grep{$_}
+    grep { !/^(?:EC (?:(?:\d+|-)\.){3}(?:\d+|-)|Fragments?|Putative replicase)$/o }
+    @name;
 }
 
 sub ext_DEGN{ ext_DE($_[0]), ext_GN($_[0]) }
@@ -92,18 +94,22 @@ sub mkdict {
     my $file = shift or die "Please specify input files";
     my $dictfile = shift or die "Please specify output dictionary file";
 
-    my $tie_failure = sub { die "Cannot tie to $_[0]" };
+    my $tie_failure = sub { die "Cannot tie to $_[0] ($!)" };
 
+    unlink $dictfile;
     tie my %dict,'DB_File', $dictfile, O_CREAT | O_RDWR, 0644, $DB_BTREE
 	or tie_failure->($dictfile);
-    my (%lc_db, %hw_db, %ml_db, %sn_db, %sl_db);
-    no strict 'refs';
-    foreach my $subdb (qw(lc hw ml sn sl)){
-	unlink ${"${dictfile}.$subdb"};
-	tie %{"${subdb}_db"}, 'DB_File', ${"${dictfile}.$subdb"},
-	O_CREAT | O_RDWR, 0644, $DB_BTREE;# or tie_failure->(${"${dictfile}.$subdb"});
+    my @subdbs = qw(lc hw ml sn sl);
+    my %subdb;
+    {
+	no strict 'refs';
+	foreach my $type (@subdbs){
+	    unlink ${"${dictfile}.$type"};
+	    tie %{$subdb{$type}}, 'DB_File', "${dictfile}.$type",
+	    O_CREAT | O_RDWR, 0644, $DB_BTREE
+		or tie_failure->(${"${dictfile}.$type"});
+	}
     }
-    use strict;
 
     my (%sl, %sn);
 
@@ -139,19 +145,19 @@ sub mkdict {
 		# the line below is for testing and debugging.
 		print $cnt."\r";
 		++$cnt;
-#		last if ++$cnt == 200;
+#		last if ++$cnt == 10000;
 	    }
 
 	}
 
 	# Build lowercase dictionary
 	while(my($k, undef) = each %dict){
-	    $lc_db{lc $k} = $k;
+	    $subdb{lc}->{lc $k} = $k;
 	    my @tok = split / /o => $k;
 	    $tok[0] = lc $tok[0];
-	    $hw_db{$tok[0]} = 1;
-	    if(scalar @tok > $ml_db{$tok[0]}){
-		$ml_db{$tok[0]} = scalar @tok;
+	    $subdb{hw}->{$tok[0]} = 1;
+	    if(scalar @tok > $subdb{ml}->{$tok[0]}){
+		$subdb{ml}->{$tok[0]} = scalar @tok;
 	    }
 	}
 
@@ -162,14 +168,14 @@ sub mkdict {
 	    next if $k eq $v;
 	    $sl{$v}->{$k} = undef;
 	}
-	%sn_db = %sn;
+	%{$subdb{sn}} = %sn;
 	%sn = ();
 	
 	while(my($k, undef) = each %sl){
-	    $sl_db{$k} = join"\x0", sort {length($a)<=>length($b)} keys%{$sl{$k}};
+	    $subdb{sl}->{$k} = join"\x0", sort {length($a)<=>length($b)} keys%{$sl{$k}};
 	}
-	
     }
+
 #    use Data::Dumper;
 #    print Dumper \%sl;
 #    print $/;

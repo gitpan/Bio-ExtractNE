@@ -9,7 +9,7 @@ use Bio::ExtractNE::Dict;
 use Bio::ExtractNE::Vars;
 use Bio::ExtractNE::CommonWords;
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 our @EXPORT;
 our @ISA;
@@ -18,6 +18,7 @@ our $DICT;
 our $USE_GAPSCORE_RPC = 0;
 our $USE_GAPSCORE = 0;
 our $USE_DICTIONARY = 1;
+our $USE_SHORTEST = 0;
 
 ##################################################
 # Load related submodules and exported subroutines
@@ -47,7 +48,7 @@ sub extractNE {
     my %opt = @_;      # left for possible coming options.
 
     my $abstract = new_abstract($input)->{text};
-    my $me = bless {}, 'Bio::ExtractNE'; # Actually, it has OO flesh
+    my $self = bless {}, 'Bio::ExtractNE'; # Actually, it has OO flesh
     my $data;
 
     if( $USE_DICTIONARY ){
@@ -55,12 +56,12 @@ sub extractNE {
 	    set_dictionary();
 	    die "Please set the dictionary first" if !ref $DICT;
 	}
-	$me->{dict} = $DICT;
+	$self->{dict} = $DICT;
 
 
 	# tokenize each sentence in texts
 	# $token_ref is an array of tokens from each sentence.
-	my $token_ref = $me->tokenize(\$abstract);
+	my $token_ref = $self->tokenize(\$abstract);
 	
 	# return segmented text with NE information
 	# - sentence
@@ -69,24 +70,35 @@ sub extractNE {
 	#  - sentence numbers with interactions
 	#  - abbreivation look-up data
 
-	$data = $me->recognizer;
+	$data = $self->recognizer;
 #	print Dumper $data->{NE};
     }
 
     # use self-implemented GAPSCORE
     if( $USE_GAPSCORE ){
-	@{$data->{NE}} = (@{$data->{NE}}, @{$me->gapscore()});
+	@{$data->{NE}} = (@{$data->{NE}}, @{$self->gapscore()});
     }
     # or use the GAPSCORE rpc module
     elsif( $USE_GAPSCORE_RPC ){
-	@{$data->{NE}} = (@{$data->{NE}}, @{$me->gapscore_rpc()});
+	@{$data->{NE}} = (@{$data->{NE}}, @{$self->gapscore_rpc()});
     }
 
     @{$data->{NE}} = grep { !&common_word($_) } @{$data->{NE}};
     @{$data->{NE}} = keys %{+{map{$_=>1} @{$data->{NE}}}};
+    if( $USE_SHORTEST ){
+	@{$data->{NE}}
+	=
+	    grep{$_}
+	    keys %{+{
+	    map{
+		my $s = $self->{dict}->get_shortest_synonym($_);
+		($s ? $s : $_) => 1
+		}
+	    @{$data->{NE}}}};
+    }
 
     {
-	sentence => $me->{sentence_ref},
+	sentence => $self->{sentence_ref},
 	%$data,
     };
 }
@@ -149,6 +161,11 @@ Use the RPC service of GAPSCORE. Default is I<NO>.
 Use the self-implemented GAPSCORE. Default is I<NO>.
 
     $USE_GAPSCORE = 1;
+
+Replace recognized named entities with their shortest
+synonyms if they have them. Default is I<NO>
+
+    $USE_SHORTEST = 1;
 
 
 =head1 DESCRIPTION

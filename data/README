@@ -1,0 +1,3 @@
+The file 'dict.src' is adapted from 
+<ftp://expasy.org/databases/swiss-prot/release_compressed/sprot44.dat.gz>
+with this command => grep -E '^(DE|GN|//)' 
