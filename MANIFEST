@@ -67,5 +67,6 @@ scripts/insert_hand_picked.pl
 scripts/parse_medical_vocabulary.pl
 t/events.t
 t/getabst.t
+t/splitsentence.t
 t/synonyms.t
 test.pl

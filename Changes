@@ -17,3 +17,7 @@
 
 1.05 Sat, 30 Oct 2004 12:15:11 +0800
 	- Flexible dictionary path setting.
+
+1.06 Sun, 03 Apr 2005 13:28:03 +0800
+	- Updated sentence segmentation method. Now it can deal with fake
+sentence boundaries, such as 'e.g.' or 'i.e.'
