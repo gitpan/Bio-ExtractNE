@@ -14,6 +14,8 @@ our @EXPORT = qw(abstract
 		 get_abstract_by_id
 		 get_abstract_by_url);
 
+our $USE_ARRAY = 0;
+
 my $abst_pattern = qr'
 <br>
  <font\ssize="\+1"><b>(?#<title>.+?)</b></font><br><br>
@@ -31,7 +33,7 @@ sub _tidy_data {
     local $_;
     $_ = decode_entities($_) foreach values %$data;
     $data->{text} =~ s/<br><br>/ /o;
-    $data;
+    return $USE_ARRAY ? [ @{$data}{qw(title author organization text)} ] : $data;
 }
 
 sub get_abstract_by_id {
@@ -95,8 +97,13 @@ Bio::ExtractNE::GetAbst - Fetch abstracts from PUBMED
 
 
 This module helps you fetch online abstracts on PUBMED. You can fetch
-abstracts by PMID, URL, or the abstract body. All the functions above
-return a hash of a PUBMED abstract.
+abstracts by PMID, URL, or the abstract body. Be default, all the
+functions above return a hash of a PUBMED abstract. If what you want
+is just an array-ref, you can $USE_ARRAY to achieve that.
+
+  $Bio::ExtractNE::GetAbst::USE_ARRAY = 1;
+
+Then they will return array-refs.
 
 =head1 COPYRIGHT AND LICENSE
 

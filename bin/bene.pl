@@ -25,8 +25,6 @@ bene.pl - A command-line tool for Bio::ExtractNE
 
 =head1 OPTIONS
 
- > bene.pl -g -id -id -file
-
    -d      Download abstracts (boolean option)
    -e      Extract named entities only
    -A      Output directory for fetched abstracts
@@ -42,12 +40,14 @@ Non-existing directories are created automatically.
 Fetch PMID 15043991, store the abstract in ./abstracts/, and
 extract named entites in ./named_entities
 
- > bene.pl -d -e -i 15043991 -A ./abstracts/ -E ./named_entities
+ > bene.pl -e -i 15043991 -A ./abstracts/ -E ./named_entities
 
 Download PMIDs that are in PMID_FILE, and store abstracts in
 ./abstracts
 
- > bene.pl -d -f PMID_FILE -A ./abstracts
+ > bene.pl -d -f PMID_FILE
+
+ > bene.pl -d -f PMID_FILE -A ./abstracts/
 
  > bene.pl -e -A ./abstracts/ -E ./named_entities
 

@@ -11,3 +11,6 @@
 	- Creating dict on the fly instead of prebuilding
 	- Added $USE_SHORTEST in ExtractNE.pm
 	- Added data/dict.src
+
+1.04 Sat, 16 Oct 2004 20:45:16 +0800
+	- Added $USE_ARRAY in Bio/ExtractNE/GetAbst.pm
